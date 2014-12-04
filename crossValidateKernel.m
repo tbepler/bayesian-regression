@@ -1,4 +1,4 @@
-function [ P, xvalerr ] = crossValidate( X, Y, kfold, parameters, train, predict, error )
+function [ P, xvalerr ] = crossValidateKernel( X, Y, K, kfold, parameters, train, predict, error )
 %CROSSVALIDATE Performs k-fold cross validation using the given training,
 %prediction, and error methods
 %   Detailed explanation goes here
@@ -11,8 +11,8 @@ function [ P, xvalerr ] = crossValidate( X, Y, kfold, parameters, train, predict
         for k = 1 : kfold
             testI = ( indices == k );
             trainI = ~testI;
-            W = train( X(trainI,:), Y(trainI), p );
-            Yh = predict( W, X(testI,:) );
+            A = train( X(trainI,:), Y(trainI), p, K(trainI,trainI) );
+            Yh = predict( A, K(testI,trainI) );
             err(k) = error( Y(testI), Yh );
         end
         xvalerr(i) = sum( err ) / kfold;
