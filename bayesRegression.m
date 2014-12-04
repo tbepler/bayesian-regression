@@ -1,4 +1,4 @@
-function [ M, S, b, xvalerr ] = bayesRegression( X, Y, alpha, beta, kfold )
+function [ M, S, b, xvalerr, a, alphagrid, betagrid ] = bayesRegression( X, Y, alpha, beta, kfold )
 
 if nargin < 5
     kfold = 5;

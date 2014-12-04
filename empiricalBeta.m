@@ -1,7 +1,11 @@
-function [beta, centered] = empiricalBeta( X, Y, plotHist )
+function [beta, centered] = empiricalBeta( X, Y, plotHist, nbins )
 
     if nargin < 3
         plotHist = false;
+    end
+    
+    if nargin < 4
+        nbins = round( length( Y ) ^ (1/2.5) );
     end
     
 %     [S,iS] = sortrows( X );
@@ -52,7 +56,18 @@ function [beta, centered] = empiricalBeta( X, Y, plotHist )
     end
 
     if plotHist
-        hist( centered );
+        hold on;
+        hist( centered, nbins );
+        mu = mean( centered );
+        sd = std( centered );
+        m = max( abs( centered ) );
+        x = linspace( -m, m, 300 );
+        xlim( [ -m m ] );
+        binW = ( max(centered) - min(centered) )/ nbins;
+        density = normpdf( x, mu, sd );
+        density = density * binW * length( centered );
+        plot( x, density, 'r' );
+        hold off;
     end
 
     beta = 1 / var( centered );
