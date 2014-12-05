@@ -5,11 +5,11 @@ if nargin < 5
 end
 
 if nargin < 4 || isempty(beta)
-    beta = 10.^(-5:5);
+    beta = 1;
 end
 
 if nargin < 3 || isempty(alpha)
-    alpha = 10.^(-5:5);
+    alpha = beta * Defaults.LAMBDAS;
 end
 
 assert( kfold > 1 );

@@ -3,7 +3,7 @@ function [W, lambda, xvalerr, lambdas] = ridgeRegression( X, Y, lambdas, centere
 %   Detailed explanation goes here
 
     if nargin < 5
-        kfold = 5;
+        kfold = Defaults.KFOLD;
     end
     
     if nargin < 4
@@ -11,7 +11,7 @@ function [W, lambda, xvalerr, lambdas] = ridgeRegression( X, Y, lambdas, centere
     end
     
     if nargin < 3 || isempty( lambdas )
-        lambdas = 10.^(-4:5);
+        lambdas = Defaults.LAMBDAS;
     end
     
     if ~centered
