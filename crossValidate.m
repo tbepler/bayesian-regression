@@ -13,10 +13,10 @@ for k = 1 : kfold
     Ytrain = Y(trainI);
     Xtest = X(testI, :);
     Ytest = Y(testI);
-    parfor i = 1 : length( parameters )
+    for i = 1 : length( parameters )
         p = parameters( i );
         W = train( Xtrain, Ytrain, p );
-        Yh = predict( W, Xtest );
+        Yh = predict( Xtest, W );
         xvalerr( i, k ) = gather( error( Ytest, Yh ) );
     end
 end

@@ -33,7 +33,8 @@ end
 % end
 
 lassoParams = { 'CV', kfold, 'Lambda', lambdas, 'Standardize', ~centered ...
-    , 'Options', statset( 'UseParallel', true ) };
+    };
+    %, 'Options', statset( 'UseParallel', true ) };
 [ W, fitinfo ] = lasso( gather(X), gather(Y), lassoParams{:} );
 err = fitinfo.MSE;
 [~,i] = min( err );

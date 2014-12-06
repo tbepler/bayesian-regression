@@ -12,7 +12,7 @@ function [ P, xvalerr ] = crossValidateKernel( X, Y, K, kfold, parameters, train
             testI = ( indices == k );
             trainI = ~testI;
             A = train( X(trainI,:), Y(trainI), p, K(trainI,trainI) );
-            Yh = predict( A, K(testI,trainI) );
+            Yh = predict( [], A, [], [], [], K(testI,trainI) );
             err(k) = error( Y(testI), Yh );
         end
         xvalerr(i) = sum( err ) / kfold;

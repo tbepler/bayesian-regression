@@ -1,4 +1,4 @@
-function Yh = predict( W, x )
+function Yh = predict( x, W )
 %PREDICT Summary of this function goes here
 %   Detailed explanation goes here
     if size( W, 1 ) == size( x , 2 ) + 1

@@ -31,7 +31,8 @@ function [W, lambda, xvalerr, lambdas] = ridgeRegression( X, Y, lambdas, centere
     end
     
     D = size( Xc, 2 );
-    W = ( Xc' * Xc + lambda * eye(D) ) \ Xc' * Yc ;
+    W = [ Xc ; repmat( sqrt( lambda ), 1, D ) ] \ [ Yc ; 0 ];
+    %W = ( Xc' * Xc + lambda * eye(D) ) \ Xc' * Yc ;
     
     if ~centered
         W0 = mean( Y ) - mean( X, 1 ) * W;
